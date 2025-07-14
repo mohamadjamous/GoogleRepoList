@@ -7,12 +7,19 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.googlerepolist.common.Resource
+import com.app.googlerepolist.common.UiEvent
 import com.app.googlerepolist.domain.model.Repo
 import com.app.googlerepolist.domain.user_case.get_repos.GetReposUseCase
 import com.app.googlerepolist.presentation.repo_list.RepoListState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,14 +27,16 @@ class RepoListViewModel @Inject constructor(
     private val getReposUseCase: GetReposUseCase
 ): ViewModel() {
 
-
-    private val _state = mutableStateOf(RepoListState())
-    val state: State<RepoListState> = _state
-
-    private var originalRepos: List<Repo> = emptyList()
+    private val _state = MutableStateFlow(RepoListState())
+    val state: StateFlow<RepoListState> = _state.asStateFlow()
 
     var searchQuery by mutableStateOf("")
         private set
+
+    private val _eventFlow = MutableSharedFlow<UiEvent>()
+    val eventFlow = _eventFlow.asSharedFlow()
+
+
 
     val filteredRepos: List<Repo>
         get() = if (searchQuery.isBlank()) state.value.repos
@@ -61,5 +70,12 @@ class RepoListViewModel @Inject constructor(
     fun onSearchQueryChanged(query: String) {
         searchQuery = query
     }
+
+    fun onRepoClick(repoId: String) {
+        viewModelScope.launch {
+            _eventFlow.emit(UiEvent.NavigateToDetail(repoId))
+        }
+    }
+
 
 }

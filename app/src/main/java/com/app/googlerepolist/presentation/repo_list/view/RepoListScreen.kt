@@ -1,5 +1,6 @@
 package com.app.googlerepolist.presentation.repo_list.view
 
+import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -8,23 +9,45 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.navigation.NavController
+import com.app.googlerepolist.common.UiEvent
 import com.app.googlerepolist.presentation.view.Screen
 import com.app.googlerepolist.presentation.repo_list.components.RepoListItem
 import com.app.googlerepolist.presentation.repo_list.viewmodel.RepoListViewModel
+import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun RepoListScreen(
     navController: NavController,
     viewModel: RepoListViewModel = hiltViewModel()
 ) {
-    val state = viewModel.state.value
+    val state by viewModel.state.collectAsState()
     val searchQuery = viewModel.searchQuery
+
+    val context = LocalContext.current
+
+    LaunchedEffect(Unit) {
+        viewModel.eventFlow.collectLatest { event ->
+            when (event) {
+                is UiEvent.NavigateToDetail -> {
+                    navController.navigate(Screen.RepoDetailScreen.route + "/${event.repoId}")
+                }
+                is UiEvent.ShowSnackBar -> {
+                    Toast.makeText(context, event.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
 
     Column(modifier = Modifier.fillMaxSize()) {
 
