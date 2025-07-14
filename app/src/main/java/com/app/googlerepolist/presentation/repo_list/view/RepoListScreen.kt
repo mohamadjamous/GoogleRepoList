@@ -77,9 +77,9 @@ fun RepoListScreen(
                 state.error.isNotBlank() -> {
                     Text(
                         text = state.error,
+                        style = MaterialTheme.typography.titleLarge,
                         color = MaterialTheme.colorScheme.error,
                         textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(16.dp)

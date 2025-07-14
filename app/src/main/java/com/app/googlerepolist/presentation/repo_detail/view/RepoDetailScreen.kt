@@ -33,6 +33,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
+import com.app.googlerepolist.presentation.repo_detail.components.InfoRow
 import com.app.googlerepolist.presentation.repo_detail.viewmodel.RepoDetailViewModel
 
 @Composable
@@ -77,7 +78,8 @@ fun RepoDetailScreen(
                     Column {
                         Text(
                             text = repo.full_name,
-                            style = MaterialTheme.typography.titleLarge
+                            style = MaterialTheme.typography.titleLarge,
+                            color = MaterialTheme.colorScheme.onBackground
                         )
                         Text(
                             text = repo.owner.login,
@@ -92,7 +94,8 @@ fun RepoDetailScreen(
 
                 Text(
                     text = repo.description ?: "No description provided.",
-                    style = MaterialTheme.typography.bodyLarge
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onBackground
                 )
 
                 InfoRow(label = "Language", value = repo.language ?: "Unknown")
@@ -128,13 +131,3 @@ fun launchUrl(url: String) {
 
 
 
-@Composable
-fun InfoRow(label: String, value: String) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Text(text = label, style = MaterialTheme.typography.bodyMedium)
-        Text(text = value, style = MaterialTheme.typography.bodyMedium)
-    }
-}

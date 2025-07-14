@@ -93,5 +93,5 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.0")
 
 
-
+    implementation("com.google.android.material:material:1.14.0-alpha02")
 }

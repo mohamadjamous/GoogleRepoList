@@ -49,6 +49,7 @@ fun RepoListItem(
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = repo.full_name,
+                color = MaterialTheme.colorScheme.onSurface,
                 style = MaterialTheme.typography.titleMedium,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
@@ -71,16 +72,19 @@ fun RepoListItem(
             ) {
                 Text(
                     text = "★ ${repo.stargazers_count}",
+                    color = MaterialTheme.colorScheme.onSurface,
                     style = MaterialTheme.typography.labelMedium
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = "Forks: ${repo.forks_count}",
+                    color = MaterialTheme.colorScheme.onSurface,
                     style = MaterialTheme.typography.labelMedium
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = repo.language ?: "N/A",
+                    color = MaterialTheme.colorScheme.onSurface,
                     style = MaterialTheme.typography.labelMedium
                 )
             }
