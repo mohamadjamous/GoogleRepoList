@@ -1,4 +1,4 @@
-package com.app.googlerepolist.presentation.view
+package com.app.googlerepolist.presentation
 
 sealed class Screen(val route: String) {
     object RepoListScreen: Screen("repo_list_screen")

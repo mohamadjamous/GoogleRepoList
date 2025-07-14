@@ -18,10 +18,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.navigation.NavController
 import com.app.googlerepolist.common.UiEvent
-import com.app.googlerepolist.presentation.view.Screen
+import com.app.googlerepolist.presentation.Screen
 import com.app.googlerepolist.presentation.repo_list.components.RepoListItem
 import com.app.googlerepolist.presentation.repo_list.viewmodel.RepoListViewModel
 import kotlinx.coroutines.flow.collectLatest

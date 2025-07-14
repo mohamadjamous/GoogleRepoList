@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     id ("kotlin-kapt")
     id ("dagger.hilt.android.plugin")
+    id("jacoco")
 }
 
 android {
@@ -39,6 +40,11 @@ android {
     buildFeatures {
         compose = true
     }
+
+
+//    jacoco {
+//        toolVersion = "0.8.8"
+//    }
 }
 
 dependencies {
@@ -84,14 +90,48 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
 
-
     // === Coil ===
     implementation("io.coil-kt:coil-compose:2.4.0")
-
 
     // === Splash Screen ===
     implementation("androidx.core:core-splashscreen:1.0.0")
 
-
     implementation("com.google.android.material:material:1.14.0-alpha02")
+
+    // Unit testing
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation("io.mockk:mockk:1.13.5")
+    testImplementation("app.cash.turbine:turbine:1.0.0") // For Flow testing
+
+    // Hilt ViewModel testing
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+}
+
+tasks.register<JacocoReport>("jacocoTestReport") {
+    dependsOn("testDebugUnitTest")
+
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
+
+    val fileFilter = listOf(
+        "**/BuildConfig.*",
+        "**/R.class",
+        "**/R$*.class",
+        "**/*Test*.*"
+    )
+
+    val debugTree = fileTree("${buildDir}/tmp/kotlin-classes/debug") {
+        exclude(fileFilter)
+    }
+
+    classDirectories.setFrom(files(debugTree))
+    sourceDirectories.setFrom(files("src/main/java"))
+    executionData.setFrom(
+        fileTree(buildDir) {
+            include("jacoco/testDebugUnitTest.exec")
+        }
+    )
 }
