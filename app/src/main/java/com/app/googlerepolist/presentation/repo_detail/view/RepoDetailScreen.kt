@@ -1,4 +1,4 @@
-package com.app.googlerepolist.presentation.repo_detail.components
+package com.app.googlerepolist.presentation.repo_detail.view
 
 import android.content.Intent
 import android.net.Uri
@@ -33,7 +33,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
-import com.app.googlerepolist.presentation.repo_detail.RepoDetailViewModel
+import com.app.googlerepolist.presentation.repo_detail.viewmodel.RepoDetailViewModel
 
 @Composable
 fun RepoDetailScreen(
@@ -90,10 +90,10 @@ fun RepoDetailScreen(
                 Divider()
 
 
-//                Text(
-//                    text = repo.description ?: "No description provided.",
-//                    style = MaterialTheme.typography.bodyLarge
-//                )
+                Text(
+                    text = repo.description ?: "No description provided.",
+                    style = MaterialTheme.typography.bodyLarge
+                )
 
                 InfoRow(label = "Language", value = repo.language ?: "Unknown")
                 InfoRow(label = "Stars", value = repo.stargazers_count.toString())

@@ -1,4 +1,4 @@
-package com.app.googlerepolist.presentation.ui.theme
+package com.app.googlerepolist.presentation.view.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,4 +1,4 @@
-package com.app.googlerepolist.presentation.ui.theme
+package com.app.googlerepolist.presentation.view.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

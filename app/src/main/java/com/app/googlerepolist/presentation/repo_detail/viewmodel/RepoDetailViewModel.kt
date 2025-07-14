@@ -1,4 +1,4 @@
-package com.app.googlerepolist.presentation.repo_detail
+package com.app.googlerepolist.presentation.repo_detail.viewmodel
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -8,8 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.app.googlerepolist.common.Constants
 import com.app.googlerepolist.common.Resource
 import com.app.googlerepolist.domain.user_case.get_repo.GetRepoUseCase
-import com.app.googlerepolist.domain.user_case.get_repos.GetReposUseCase
-import com.app.googlerepolist.presentation.repo_list.RepoListState
+import com.app.googlerepolist.presentation.repo_detail.RepoDetailState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
