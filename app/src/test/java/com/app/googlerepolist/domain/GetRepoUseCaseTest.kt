@@ -40,7 +40,7 @@ class GetRepoUseCaseTest {
     @Test
     fun `emits repo detail successfully`() = runTest {
         val fakeDto = RepoDetailDto(
-            id = 1,
+            id = 123,
             name = "TestRepoDetail",
             full_name = "testorg/TestRepoDetail",
             owner = OwnerX(
@@ -181,7 +181,7 @@ class GetRepoUseCaseTest {
         )
 
 
-        coEvery { repository.getRepoBydId("1") } returns fakeDto
+        coEvery { repository.getRepoBydId("123") } returns fakeDto
 
         val result = useCase("123").toList()
         assertTrue(result[1] is Resource.Success)
