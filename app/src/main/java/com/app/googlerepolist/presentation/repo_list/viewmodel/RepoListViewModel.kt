@@ -49,7 +49,7 @@ class RepoListViewModel @Inject constructor(
     }
 
 
-    private fun getRepos() {
+    fun getRepos() {
         getReposUseCase().onEach { result ->
             when (result) {
                 is Resource.Success -> {

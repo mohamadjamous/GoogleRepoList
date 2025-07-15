@@ -74,17 +74,27 @@ fun RepoListScreen(
                 }
 
                 state.error.isNotBlank() -> {
-                    Text(
-                        text = state.error,
-                        style = MaterialTheme.typography.titleLarge,
-                        color = MaterialTheme.colorScheme.error,
-                        textAlign = TextAlign.Center,
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(16.dp)
                             .align(Alignment.Center)
-                    )
+                    ) {
+                        Text(
+                            text = state.error,
+                            style = MaterialTheme.typography.titleLarge,
+                            color = MaterialTheme.colorScheme.error,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.padding(bottom = 8.dp)
+                        )
+
+                        Button(onClick = { viewModel.getRepos() }) {
+                            Text(text = "Retry")
+                        }
+                    }
                 }
+
 
                 else -> {
 
