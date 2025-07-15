@@ -1,5 +1,6 @@
 package com.app.googlerepolist.domain
 
+import com.app.googlerepolist.MainDispatcherRule
 import com.app.googlerepolist.common.Resource
 import com.app.googlerepolist.data.remote.dto.CustomPropertiesX
 import com.app.googlerepolist.data.remote.dto.License
@@ -16,12 +17,16 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @ExperimentalCoroutinesApi
 class GetRepoUseCaseTest {
+
+    @get:Rule
+    val mainDispatcherRule = MainDispatcherRule()
 
     private lateinit var repository: RepoRepository
     private lateinit var useCase: GetRepoUseCase
@@ -178,7 +183,7 @@ class GetRepoUseCaseTest {
 
         coEvery { repository.getRepoBydId("1") } returns fakeDto
 
-        val result = useCase("1").toList()
+        val result = useCase("123").toList()
         assertTrue(result[1] is Resource.Success)
         assertEquals("Test", (result[1] as Resource.Success).data?.name)
     }

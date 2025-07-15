@@ -1,6 +1,7 @@
 package com.app.googlerepolist.presentation
 
 import androidx.lifecycle.SavedStateHandle
+import com.app.googlerepolist.MainDispatcherRule
 import com.app.googlerepolist.data.remote.dto.CustomPropertiesX
 import com.app.googlerepolist.data.remote.dto.License
 import com.app.googlerepolist.data.remote.dto.Organization
@@ -15,11 +16,15 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.junit.Rule
 
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @ExperimentalCoroutinesApi
 class RepoDetailViewModelTest {
+
+    @get:Rule
+    val mainDispatcherRule = MainDispatcherRule()
 
     @Test
     fun `fetch repo detail returns success`() = runTest {

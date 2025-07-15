@@ -1,5 +1,6 @@
 package com.app.googlerepolist.presentation
 
+import com.app.googlerepolist.MainDispatcherRule
 import com.app.googlerepolist.data.remote.dto.CustomProperties
 import com.app.googlerepolist.data.remote.dto.License
 import com.app.googlerepolist.data.remote.dto.Owner
@@ -13,11 +14,15 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @ExperimentalCoroutinesApi
 class RepoListViewModelTest {
+
+    @get:Rule
+    val mainDispatcherRule = MainDispatcherRule()
 
     private lateinit var viewModel: RepoListViewModel
 

@@ -1,5 +1,6 @@
 package com.app.googlerepolist.data
 
+import com.app.googlerepolist.MainDispatcherRule
 import com.app.googlerepolist.data.remote.GoogleRepoApi
 import com.app.googlerepolist.data.remote.dto.CustomProperties
 import com.app.googlerepolist.data.remote.dto.License
@@ -14,11 +15,16 @@ import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
+
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @ExperimentalCoroutinesApi
 class RepoRepositoryImplTest {
+
+    @get:Rule
+    val mainDispatcherRule = MainDispatcherRule()
 
     private lateinit var api: GoogleRepoApi
     private lateinit var repository: RepoRepository
@@ -31,6 +37,7 @@ class RepoRepositoryImplTest {
 
     @Test
     fun `getRepos returns list of RepoDto`(): Unit = runTest {
+
         val repoList = listOf(
             RepoDto(
                 id = 1,
