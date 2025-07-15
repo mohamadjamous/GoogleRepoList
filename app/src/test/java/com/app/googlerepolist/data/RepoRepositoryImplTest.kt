@@ -123,7 +123,7 @@ class RepoRepositoryImplTest {
                 has_pages = false,
                 has_discussions = false,
                 forks_count = 10,
-                mirror_url = null, // Or some "https://example.com/mirror" if needed
+                mirror_url = null,
                 archived = false,
                 disabled = false,
                 open_issues_count = 5,
